@@ -1,0 +1,23 @@
+{
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.enhancedColorization": "enabled",
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "files.associations": {
+    "*.template": "yaml",
+    "cstdlib": "c",
+    "__hash_table": "c",
+    "__split_buffer": "c",
+    "array": "c",
+    "bitset": "c",
+    "deque": "c",
+    "initializer_list": "c",
+    "queue": "c",
+    "span": "c",
+    "stack": "c",
+    "string": "c",
+    "string_view": "c",
+    "unordered_map": "c",
+    "vector": "c",
+    "format": "c"
+  },
+}
