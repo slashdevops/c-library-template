@@ -50,3 +50,15 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Extra files and directories
+lib/
+obj/
+build/
+html/
+latex/
+
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
