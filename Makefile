@@ -40,7 +40,7 @@ K := $(foreach exec,$(EXECUTABLES),\
   $(if $(shell which $(exec)),some string,$(error "No $(exec) in PATH)))
 
 # Compiler and linker flags
-CFLAGS = -Wall -Wextra -Werror -O2 -g -std=c2x -pedantic # Compiler flags
+CFLAGS = -Wall -Wextra -Werror -Wunused -O2 -g -std=c2x -pedantic # Compiler flags
 LDFLAGS = -shared # Linker flags (shared library)  (change to -static for static library)
 
 SRC_DIR := src
@@ -91,12 +91,12 @@ $(LIB_DIR):
 
 ##@ Test commands
 .PHONY: test
-test: clean all $(TEST_APP) ## Run tests
+test: clean build $(TEST_APP) ## Run tests
 	@echo "Running tests..."
 	./$(BUILD_DIR)/$(TEST_APP)
 
 .PHONY: memcheck
-memcheck: clean all test ## Run tests and check for memory leaks
+memcheck: test ## Run tests and check for memory leaks
 	@echo "Running tests with valgrind..."
 	leaks --atExit -- ./$(BUILD_DIR)/$(TEST_APP)
 

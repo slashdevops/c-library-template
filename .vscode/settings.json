@@ -18,6 +18,7 @@
     "string_view": "c",
     "unordered_map": "c",
     "vector": "c",
-    "format": "c"
+    "format": "c",
+    "__node_handle": "c"
   },
 }
