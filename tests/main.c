@@ -109,6 +109,7 @@ void test_list_destroy_10()
   for (int i = 0; i < 10; i++)
   {
     Node *node = malloc(sizeof(Node));
+    node->data = NULL;
     node->next = NULL;
     list_prepend(list, node);
   }
