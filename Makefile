@@ -4,25 +4,27 @@
 TEST_APP = test_linkedlist
 TARGET_LIB = linkedlistlib.so
 
-CC_MACOS = "/opt/homebrew/bin/gcc-13"
-CC_LINUX = "/usr/bin/gcc"
+CC_MACOS ?= /opt/homebrew/bin/gcc-13
+CC_LINUX ?= /usr/bin/gcc
 
-AR_MACOS = "/opt/homebrew/bin/gcc-ar-13"
-AR_LINUX = "/usr/bin/ar"
+AR_MACOS ?= /opt/homebrew/bin/gcc-ar-13
+AR_LINUX ?= /usr/bin/ar
 
-MEMCHECK_MACOS = "/usr/bin/leaks"
-MEMCHECK_LINUX = "/usr/bin/valgrind"
+MEMCHECK_MACOS ?= /usr/bin/leaks
+MEMCHECK_LINUX ?= /usr/bin/valgrind
 
 # Determine OS
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
 	MEMCHECK = $(MEMCHECK_MACOS)
+	MEMCHECK_ARGS = --atExit --
 	CC = $(CC_MACOS)
 	AR = $(AR_MACOS)
 endif
 ifeq ($(UNAME_S),Linux)
 	MEMCHECK = $(MEMCHECK_LINUX)
+	MEMCHECK_ARGS =
 	CC = $(CC_LINUX)
 	AR = $(AR_LINUX)
 endif
@@ -97,8 +99,8 @@ test: clean build $(TEST_APP) ## Run tests
 
 .PHONY: memcheck
 memcheck: test ## Run tests and check for memory leaks
-	@echo "Running tests with valgrind..."
-	leaks --atExit -- ./$(BUILD_DIR)/$(TEST_APP)
+	@echo "Running tests with memory check..."
+	$(MEMCHECK) $(MEMCHECK_ARGS) ./$(BUILD_DIR)/$(TEST_APP)
 
 ##@ Clean commands
 .PHONY: clean
